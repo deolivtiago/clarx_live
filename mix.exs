@@ -76,10 +76,16 @@ defmodule ClarxLive.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "test.reset": ["ecto.drop", "test"],
-      ci: ["format --check-formatted", "credo --strict", "coveralls --warnings-as-errors"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind default", "esbuild default"],
-      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
+      "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"],
+      ci: [
+        "deps.unlock --check-unused",
+        "compile --warnings-as-errors",
+        "format --check-formatted",
+        "credo --strict",
+        "coveralls --warnings-as-errors"
+      ]
     ]
   end
 end
