@@ -8,6 +8,7 @@ defmodule ClarxLive.MixProject do
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
+      preferred_cli_env: [ci: :test, "test.reset": :test],
       aliases: aliases(),
       deps: deps()
     ]
@@ -49,7 +50,8 @@ defmodule ClarxLive.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.22"},
       {:jason, "~> 1.4"},
-      {:plug_cowboy, "~> 2.6"}
+      {:plug_cowboy, "~> 2.6"},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
     ]
   end
 
@@ -65,6 +67,8 @@ defmodule ClarxLive.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "test.reset": ["ecto.drop", "test"],
+      ci: ["format --check-formatted", "credo --strict", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
       "assets.build": ["tailwind default", "esbuild default"],
       "assets.deploy": ["tailwind default --minify", "esbuild default --minify", "phx.digest"]
