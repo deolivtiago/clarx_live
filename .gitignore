@@ -35,6 +35,9 @@ clarx_live-*.tar
 npm-debug.log
 /assets/node_modules/
 
-# ignore editor files
+# Ignore editor files
 /.elixir_ls/
 /.vscode/
+
+# Ignore env files
+/.env

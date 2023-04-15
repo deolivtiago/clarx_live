@@ -10,6 +10,12 @@ import Config
 config :clarx_live,
   ecto_repos: [ClarxLive.Repo]
 
+# Configures the repo
+config :clarx_live, ClarxLive.Repo,
+  migration_primary_key: [type: :binary_id],
+  migration_foreign_key: [type: :binary_id],
+  migration_timestamps: [type: :timestamptz]
+
 # Configures the endpoint
 config :clarx_live, ClarxLiveWeb.Endpoint,
   url: [host: "localhost"],
