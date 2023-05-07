@@ -11,9 +11,6 @@ defmodule ClarxLive.Schema do
       @foreign_key_type :binary_id
       @timestamps_opts [type: :utc_datetime]
 
-      @doc false
-      def changeset(attrs), do: changeset(struct(__MODULE__), attrs)
-
       @doc """
       Creates a changeset with errors.
 
